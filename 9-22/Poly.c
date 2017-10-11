@@ -18,12 +18,12 @@ int main()
     Poly* head=NULL;
     printf("Please input polynomial of one indeterminate pa<like 1,1 and 0is over>:\n");
     Poly* head1=createpoly();
-    //printf("Please input polynomial of one indeterminate pb<like 1,1 and 0is over>:\n");
-    //Poly* head2=createpoly();
+    printf("Please input polynomial of one indeterminate pb<like 1,1 and 0is over>:\n");
+    Poly* head2=createpoly();
     printf("----------------pa---------------\n");
     printpoly(head1);
-    //printf("----------------pb---------------\n");
-    //printpoly(head2);
+    printf("----------------pb---------------\n");
+    printpoly(head2);
 
     while(1)
     {
@@ -36,13 +36,13 @@ int main()
 
         if(chose==1)
         {
-           // head=addpoly(head1,head2);
-          ; // printpoly(head);
+           head=addpoly(head1,head2);
+           printpoly(head);
         }
         else if(chose == 2)
         {
-           ;// head=subpoly(head1,head2);
-           // printpoly(head);
+           head=subpoly(head1,head2);
+           printpoly(head);
         }    
         else if(chose == 3)
         {
@@ -181,7 +181,7 @@ Poly* addpoly(Poly* head1,Poly* head2)
         pc->next=qc;
         pc=qc;
     }
-return head3;
+	return head3;
 }
 Poly* subpoly(Poly* head1,Poly* head2)
 {
@@ -202,23 +202,23 @@ Poly* derpoly(Poly* head)
 {
     Poly* p=head->next;
     Poly* tmp=head;
+    Poly* head3,*rear,*pnew;
+    head3=(Poly*)malloc(sizeof(Poly));
+    head3->next=NULL;
+    rear=head3;
     while(p)
     {
-        if(p->expn==0)
+        if(p->expn!=0)
         {
-            p=p->next;
-            free(tmp->next);
-            tmp->next=p;
-            tmp=tmp->next;
-        } 
-        else
-        {
-            p->coef=p->coef*p->expn;
-            (p->expn)--;
-            tmp=p;
-            p=p->next;
+        	pnew=(Poly*)malloc(sizeof(Poly));
+            pnew->next=rear->next;
+            rear->next=pnew;
+            pnew->coef=p->coef * p->expn;
+            pnew->expn=p->expn-1;
+            rear=rear->next;
         }
+        p=p->next;
     }
-    return head;
+    return head3;
 
 }
