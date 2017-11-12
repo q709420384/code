@@ -61,7 +61,7 @@ void hchees(int chees[][MAX],int step_x,int step_y)
 	}
 }
 
-int main(/*int argc, char *argv[]*/) 
+int main() 
 {
 	int chees[MAX][MAX];
 	int i ,j;
@@ -76,7 +76,7 @@ int main(/*int argc, char *argv[]*/)
 	int z,h;
 	printf("请输入横纵坐标中间以逗号隔开：\n");
 	scanf("%d,%d",&h,&z);
-    hchees(chees,z,h);
+    hchees(chees,h,z);
 	printarr(chees);
 	return 0;
 }
