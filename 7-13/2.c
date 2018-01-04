@@ -37,7 +37,7 @@ void CreateHaffTree(int* weight,int n,HaffTree* pHaffTree)
 				min2=min1;
 				x2=x1;
 				min1=pHaffTree[j].weight;
-                                x1=j;
+                x1=j;
 			}
 			else if(pHaffTree[j].weight<min2&&pHaffTree[j].flag==0)
 			{
@@ -85,15 +85,31 @@ void HaffCode(HaffTree* pHaffTree,int n,char*** code)
 
 void main()
 {
-	int weight[]={7,5,2,4};
-	int n=sizeof(weight)/sizeof(int);
+	int n,i;
+	printf("请输入字符集大小：");
+	scanf("%d",&n);
+	getchar();
+	char *p = (char*)malloc(sizeof(char) * n);
+	int *weight = (int *)malloc(sizeof(int) * n);
+	
+	printf("请输入字符:");
+	for(i=0; i<n; i++)
+	{
+		scanf(" %c",&p[i]);
+	}
+	
+	printf("请输入权值:");
+	for(i=0; i<n; i++)
+	{
+		scanf("%d",&weight[i]);
+	}
 	HaffTree* pHaffTree=(HaffTree*)malloc(sizeof(HaffTree)*(2*n-1));
 	CreateHaffTree(weight,n,pHaffTree);
 	char** code=NULL;
 	HaffCode(pHaffTree,n,&code);
-	for(int i=0;i<n;++i)
+	for(i=0;i<n;i++)
 	{
-		printf("%d ",weight[i]);
+		printf("字符:%c 权值:%d 编码:",p[i],weight[i]);
 		puts(code[i]);
 	}
 }

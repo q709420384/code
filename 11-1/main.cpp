@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 	//const char *p="ABC##DE#G##F###"; //"ABC##DE##F##G#H##";
-	BinTreeNode* Targe,*par;
+	//BinTreeNode* Targe,*par;
 	BinTree T;
 	InitBinTree(&T);
 	//CreateBinTree(&T,p);

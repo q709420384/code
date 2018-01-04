@@ -1,10 +1,10 @@
 
 /**********************************************************
-*    > File Name: cli.c
-*    > Author: 51CC_baosongshan
-*    > Mail: baosongshan2006@163.com 
-*    > Created Time: 2017年10月21日 星期六 11时12分16秒
-**********************************************************/
+ *    > File Name: cli.c
+ *    > Author: 51CC_baosongshan
+ *    > Mail: baosongshan2006@163.com 
+ *    > Created Time: 2017年10月21日 星期六 11时12分16秒
+ **********************************************************/
 
 #include"utili.h"
 
@@ -17,12 +17,16 @@ int main()
         exit(1);
     }
 
-    int ret = mkfifo(read_fifo, O_CREAT|O_EXCL|0755);
-    if(ret == -1)
+    int ret;
+    if((ret=access(read_fifo, F_OK))!= 0)
     {
-        perror("mkfifo");
-        close(read_fd);
-        exit(1);
+        ret = mkfifo(read_fifo, O_CREAT|0755);
+        if(ret == -1)
+        {
+            perror("mkfifo");
+            close(read_fd);
+            exit(1);
+        }
     }
     int write_fd = open(read_fifo, O_WRONLY);
     if(write_fd == -1)
